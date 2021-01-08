@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>Narbonne</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+	crossorigin=""/>
+	<!-- Make sure you put this AFTER Leaflet's CSS -->
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+	integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+	crossorigin=""></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" >
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+	<link rel="stylesheet" href="assets/css/style.css" />
+</head>
+
+<body>
+	
+
+	<div class="main">
+		
+		
+		<!-- BARRE DE NAVIGATION -->
+		
+		<div id="navbar">
+			<ul>
+				<li>AU <BR /><span style="font-family: Javiera-Black;">QUOTIDIEN</span></li>
+			</ul>
+			<ul>
+				<li>DÉMARCHES <br /><span style="font-family: Javiera-Black;">& TÉLÉSERVICES</span></li>
+			</ul>
+			<ul>
+				<li>SORTIES <br /><span style="font-family: Javiera-Black;">& DÉCOUVERTES</span></li>
+			</ul>
+			<div class="logo">
+				<img src="assets/Images/Logo.png" alt="Logo" class="" />
+			</div>
+			<ul>
+				<li>LA <br /><span style="font-family: Javiera-Black;">MUNICIPALITÉ</span></li>
+			</ul>
+			<ul>
+				<li>PARTICIPATION <br /><span style="font-family: Javiera-Black;">CITOYENNE</span></li>
+			</ul>
+			<ul>
+				<li><a class="allo-narbonne" href="/allo-narbonne" data-tel="0800151311" data-url="/allo-narbonne" >
+					<strong>Allo Narbonne</strong><br>0800 15 13 11
+				</a></li>
+			</ul>
+		</div>
+	
+		<div class="wrapper">
+			<input type="text" class="input" placeholder="search">
+			<div class="searchbtn">
+				<i class="fas fa-search"></i>
+			</div>
+		</div>
+	
+		<div class="head">
+			<div class="banniere">
+				<div id="titre"><h1><u>Au coeur des possibles</u></h1></div>
+			</div>
+		
+		</div>
+	</div>
+	
+	
+	<!-- LORENZO -->
+	
+	<div class="header2">
+		<div class="pre">
+			<h1>Présentation</h1>
+			<tr>
+				<p>
+					<img src="assets/Images/Lorenzo.jpeg" align="left" />
+		
+					<p>Lorenzo Von Matterhorn est né quelque part en Suisse au printemps 1974. La date et les circonstances exactes de sa naissance sont inconnues puisqu'il a été immédiatement placé dans un panier et jeté dans une rivière. Le jeune Lorenzo a parcouru les eaux cristallines de la fonte des glaciers alpins sur des centaines de kilomètres jusqu'à ce qu'une jeune femme milanaise découvre le panier le long des rives du Pô. Certains disent que c'est ce premier voyage à Milan qui a alimenté à la fois son amour de l'exploration et de la mode.
+			
+						<p>Peu de temps après que sa famille a déménagé à New York à la fin des années 70, Lorenzo a commencé à sauver des chiots errants et d'autres animaux mignons. En tant que personne abandonnée lui-même, Lorenzo a reconnu à la fois la douleur de la solitude et le pouvoir de l'espoir. Un soir, tout en soignant un Cocker Spaniel particulièrement mignon, Lorenzo remarqua le reste de sa couvée hurler à l'unisson. Curieux de leurs capacités, il a passé les mois suivants à développer leurs voix et les a ensuite inscrites comme acte musical dans un festival local sous le nom de DOG STEVENS. Ils ont pris la première place et sont devenus l'un des actes musicaux animaliers les plus réussis depuis les Beatles</p>
+		
+						<p>Arrivé à Narbonne, il fait la découverte de lieux atypiques qui le pousse à créer ce site afin de montrer au monde entier ces cinq lieux de privilèges dont il a su se montrer digne. Pour lui, c'était plus qu'une simple destination... C'était l'espoir de retrouver goût à la simplicité.<p>
+		
+					</div>
+				</div>
+				
+				
+				
+				<!-- MAP -->
+				
+				<div id="mapid"></div>
+				
+				
+				<!-- METEO -->
+	
+				<div class="boite">
+					<div id="city" class="box"></div>
+					<div id="temp" class="box"></div> 
+					<div id="humidity" class="box"></div>
+					<div id="wind" class="box"></div>
+				</div>
+	
+				<script>
+					const APIKEY = '86c9ead4d9f6c63fe41110bf0b278351';
+
+					let url = `https://api.openweathermap.org/data/2.5/weather?q=Narbonne&appid=${APIKEY}&units=metric&lang=fr`;
+
+					fetch(url).then((response) =>
+					response.json().then((data) => {
+						console.log(data);
+						document.querySelector('#city').innerHTML = data.name;
+						let temp = document.querySelector('#temp');
+						temp.innerHTML = `${Math.round(data.main.temp)}` + ' C°'
+						document.querySelector('#humidity').innerHTML = data.main.humidity + ' %';
+						document.querySelector('#wind').innerHTML = data.wind.speed + ' m/s';
+					})
+					);
+				</script>
+	
+				<div class="container"></div>
+				
+				
+				<!-- FOOTER -->
+				
+				<footer>
+
+					<section class="ft-main">
+						<div class="ft-main-item">
+							<h2 class="ft-title">About</h2>
+							<ul>
+								<li><a href="#">Services</a></li>
+								<li><a href="#">Portfolio</a></li>
+								<li><a href="#">Pricing</a></li>
+								<li><a href="#">Customers</a></li>
+								<li><a href="#">Careers</a></li>
+							</ul>
+						</div>
+						<div class="ft-main-item">
+							<h2 class="ft-title">Resources</h2>
+							<ul>
+								<li><a href="#">Docs</a></li>
+								<li><a href="#">Blog</a></li>
+								<li><a href="#">eBooks</a></li>
+								<li><a href="#">Webinars</a></li>
+							</ul>
+						</div>
+						<div class="ft-main-item">
+							<h2 class="ft-title">Contact</h2>
+							<ul>
+								<li><a href="#">Help</a></li>
+								<li><a href="#">Sales</a></li>
+								<li><a href="#">Advertise</a></li>
+							</ul>
+						</div>
+						<div class="ft-main-item">
+							<h2 class="ft-title">Stay Updated</h2>
+							<p>Subscribe to our newsletter to get our latest news.</p>
+							<form>
+								<input type="email" name="email" placeholder="Enter email address">
+								<input type="submit" value="Subscribe">
+							</form>
+						</div>
+					</section>
+     
+					
+					<!-- SOCIAL -->
+					
+					<section class="ft-social">
+						<ul class="ft-social-list">
+							<li><a href="#"><i class="fab fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+							<li><a href="https://github.com/H4nk17?tab=repositories" target="_blank"><i class="fab fa-github"></i></a></li>
+							<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+							<li><a href="#"><i class="fab fa-youtube"></i></a></li>
+						</ul>
+					</section>
+					
+				</footer>
+	
+			</body>
+
+
+			<script type="text/javascript" src="assets/js/app.js"></script>
+
+
+			</html>
